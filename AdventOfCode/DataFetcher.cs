@@ -9,7 +9,19 @@ using System.Threading.Tasks;
 
 static class DataFetcher
 {
+    private static string _baseUrl;
+    private static string _cookieName;
+    private static string _cookieVal;
+
     private static string data;
+
+    public static void Init(string baseUrl, string cookieName, string cookieVal)
+    {
+        _baseUrl = baseUrl;
+        _cookieName = cookieName;
+        _cookieVal = cookieVal;
+    }
+
     public static List<string> ParseDataAsStrings(string deliminator) => data.Split($"{deliminator}").ToList();
     public static List<int> ParseDataAsInts(string deliminator)
     {
@@ -19,12 +31,12 @@ static class DataFetcher
 
     public static void GetAndStoreData(int year, int day, string part = "")
     {
-        var baseAdress = new Uri("https://adventofcode.com");
+        var baseAdress = new Uri(_baseUrl);
         var cookieContainer = new CookieContainer();
         using var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
         using var client = new HttpClient(handler) {BaseAddress = baseAdress };
 
-        cookieContainer.Add(baseAdress, new Cookie("session", "53616c7465645f5f6b0272abc48e7abee05b26713c0163b4807bcba0e4253fbb3383c629e58172f792c3f8b808e98c58")) ;
+        cookieContainer.Add(baseAdress, new Cookie(_cookieName, _cookieVal)) ;
         var res = client.GetAsync($"/{year}/day/{day}/input{part}").GetAwaiter().GetResult();
         data = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
     }
