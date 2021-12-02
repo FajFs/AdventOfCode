@@ -1,6 +1,4 @@
-﻿using AdventOfCode._2021;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using Microsoft.Extensions.Configuration;
 using System.IO;
 
 
@@ -15,13 +13,14 @@ class Program
         var url = conf.GetSection("Configuration:BaseURL").Value;
         var name = conf.GetSection("Configuration:CookieName").Value;
         var val = conf.GetSection("Configuration:CookieValue").Value;
+        var day = int.Parse(conf.GetSection("Configuration:Day").Value);
         DataFetcher.Init(url, name, val);
+        new AOCRunner(day).Run();
     }
 
     static void Main(string[] args)
     {
         Configure();
-        new AOCRunner().Run();
     }
 }
 

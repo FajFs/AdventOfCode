@@ -1,19 +1,15 @@
-﻿using AdventOfCode._2021;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-class AOCRunner
+﻿class AOCRunner
 {
-    public AOCRunner() { }
+    private int _day;
+    public AOCRunner(int day) => _day = day;
 
-    public void Run()
+    public object Run()
     {
-        var day1 = new Day1();
-        day1.Part1();
-        day1.Part2();
+        return _day switch
+        {
+            1 => new Day1().Part1().Part2(),
+            2 => new Day2().Part1().Part2(),
+            _=> ""     
+        };
     }
 }
