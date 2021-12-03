@@ -22,7 +22,7 @@ static class DataFetcher
         _cookieVal = cookieVal;
     }
 
-    public static List<string> ParseDataAsStrings(string deliminator) => data.Split($"{deliminator}").ToList();
+    public static List<string> ParseDataAsStrings(string deliminator) => data.Split($"{deliminator}").ToList().Where(d => !string.IsNullOrEmpty(d)).ToList();
     public static List<int> ParseDataAsInts(string deliminator)
     {
         var x = 0;
