@@ -31,6 +31,7 @@ static class DataFetcher
 
     public static void GetAndStoreData(int year, int day, string part = "")
     {
+        if (string.IsNullOrEmpty(_baseUrl)) return;
         var baseAdress = new Uri(_baseUrl);
         var cookieContainer = new CookieContainer();
         using var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
@@ -39,6 +40,11 @@ static class DataFetcher
         cookieContainer.Add(baseAdress, new Cookie(_cookieName, _cookieVal)) ;
         var res = client.GetAsync($"/{year}/day/{day}/input{part}").GetAwaiter().GetResult();
         data = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+    }
+
+    public static void SetTestData(string testData)
+    {
+        data = testData;
     }
 }
 

@@ -11,6 +11,7 @@
             2 => new Day2().Part1().Part2(),
             3 => new Day3().Part1().Part2(),
             4 => new Day4().Part1().Part2(),
+            5 => new Day5().Part1().Part2(),
             _=> ""     
         };
     }

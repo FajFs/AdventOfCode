@@ -18,7 +18,7 @@ class Program
         new AOCRunner(day).Run();
     }
 
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         Configure();
     }
