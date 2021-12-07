@@ -12,7 +12,7 @@ public class Day7
     {
         var data = DataFetcher.ParseDataAsInts(",");
         var minMoves = int.MaxValue;
-        for (int moveTo = 0; moveTo < data.Count; moveTo++)
+        for (int moveTo = 0; moveTo < data.Max(); moveTo++)
         {
             var dist = data.Select(x => Math.Abs(x - moveTo)).Sum();
             if (dist < minMoves) minMoves = dist;
@@ -24,7 +24,7 @@ public class Day7
     {
         var data = DataFetcher.ParseDataAsInts(",");
         var minMoves = int.MaxValue;
-        for (int moveTo = 0; moveTo < data.Count; moveTo++)
+        for (int moveTo = 0; moveTo < data.Max(); moveTo++)
         {
             var dist = data.Select(
                 x => Enumerable.Range(1, Math.Abs(x - moveTo)).Sum()).Sum();

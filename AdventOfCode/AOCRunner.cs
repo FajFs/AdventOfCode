@@ -25,6 +25,7 @@ class AOCRunner
             5 => new Day5().Part1().Part2(),
             6 => new Day6().Part1().Part2(),
             7 => new Day7(year, day).Part1().Part2(),
+            8 => new Day8(year, day).Part1().Part2(),
             _=> ""     
         };
     }
