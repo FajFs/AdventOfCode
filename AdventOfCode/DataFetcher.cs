@@ -57,7 +57,7 @@ static class DataFetcher
 
     public static void SetTestData(string testData)
     {
-        data = testData;
+        data = testData.Replace("\r", "");
     }
 }
 
