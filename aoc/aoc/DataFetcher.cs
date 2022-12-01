@@ -13,7 +13,7 @@ public class DataFetcher
         _httpClient = httpClientFactory.CreateClient("DataFetcherClient") ?? throw new ArgumentNullException(nameof(httpClientFactory));
     }
 
-    public List<string> ParseDataAsStrings(string deliminator) => Data.Split($"{deliminator}").Where(x => !string.IsNullOrEmpty(x)).ToList();
+    public List<string> ParseDataAsStrings(string deliminator) => Data.Split($"{deliminator}").Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim()).ToList();
     public List<int> ParseDataAsInts(string deliminator) => Data.Split($"{deliminator}").Where(x => !string.IsNullOrEmpty(x)).Select(x => int.Parse(x)).ToList();
 
     private void StoreData(int year, int day) => File.WriteAllText($"year{year}day{day}.txt", Data);
