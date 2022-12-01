@@ -25,7 +25,6 @@ public class DayOne
                 elf.Split("\n").Select(x => int.Parse(x)).Sum())
             .Max();
 
-
         Console.WriteLine($"part 1: {result}");
     }
     
@@ -38,7 +37,6 @@ public class DayOne
             .Take(3)
             .Sum();
             
-        Console.WriteLine($"part 1: {result}");
-
+        Console.WriteLine($"part 2: {result}");
     }
 }
