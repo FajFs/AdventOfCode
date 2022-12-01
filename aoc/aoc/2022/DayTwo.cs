@@ -1,7 +1,7 @@
-﻿public class DayOne
+﻿public class DayTwo
 {
     private readonly DataFetcher _dataFetcher;
-    public DayOne(DataFetcher dataFetcher)
+    public DayTwo(DataFetcher dataFetcher)
     {
         _dataFetcher = dataFetcher ?? throw new ArgumentNullException(nameof(dataFetcher));
     }
@@ -15,22 +15,14 @@
 
     private void Part1()
     {
-        var result = _dataFetcher.ParseDataAsStrings("\n\n")
-            .Select(elf =>
-                elf.Split("\n").Select(x => int.Parse(x)).Sum())
-            .Max();
+        var result = "";
 
         Console.WriteLine($"part 1: {result}");
     }
     
     private void Part2()
     {
-        var result = _dataFetcher.ParseDataAsStrings("\n\n")
-            .Select(elf =>
-                elf.Split("\n").Select(x => int.Parse(x)).Sum())
-            .OrderBy(x => -x)
-            .Take(3)
-            .Sum();
+        var result = "";
             
         Console.WriteLine($"part 2: {result}");
     }

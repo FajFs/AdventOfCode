@@ -30,8 +30,10 @@ public class DataFetcher
         }
     }
 
-    public async Task GetAndStoreData(int year, int day, string part = "")
+    public async Task GetAndStoreData(int year = 0, int day = 0, string part = "")
     {
+        day = day == 0 ?  DateTime.Now.Day : day;
+        year = year == 0 ? DateTime.Now.Year : year;
         if (TryLoadDataFromFile(year, day)) return;
         var res = await _httpClient.GetAsync(new Uri($"{year}/day/{day}/input{part}", UriKind.Relative));
         Data = await res.Content.ReadAsStringAsync();
