@@ -26,7 +26,7 @@ serviceCollection.AddHttpClient("DataFetcherClient")
 serviceCollection.AddScoped<DataFetcher>();
 serviceCollection.AddTransient<DayOne>();
 serviceCollection.AddTransient<DayTwo>();
-//serviceCollection.AddTransient<DayThree>();
+serviceCollection.AddTransient<DayThree>();
 //serviceCollection.AddTransient<DayFour>();
 //serviceCollection.AddTransient<DayFive>();
 //serviceCollection.AddTransient<DaySix>();
