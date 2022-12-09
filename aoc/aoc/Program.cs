@@ -27,13 +27,13 @@ serviceCollection.AddScoped<DataFetcher>();
 serviceCollection.AddTransient<DayOne>();
 serviceCollection.AddTransient<DayTwo>();
 serviceCollection.AddTransient<DayThree>();
-//serviceCollection.AddTransient<DayFour>();
-//serviceCollection.AddTransient<DayFive>();
-//serviceCollection.AddTransient<DaySix>();
-//serviceCollection.AddTransient<DaySeven>();
-//serviceCollection.AddTransient<DayEight>();
-//serviceCollection.AddTransient<DayNine>();
-//serviceCollection.AddTransient<DayTen>();
+serviceCollection.AddTransient<DayFour>();
+serviceCollection.AddTransient<DayFive>();
+serviceCollection.AddTransient<DaySix>();
+serviceCollection.AddTransient<DaySeven>();
+serviceCollection.AddTransient<DayEight>();
+serviceCollection.AddTransient<DayNine>();
+serviceCollection.AddTransient<DayTen>();
 //serviceCollection.AddTransient<DayEleven>();
 //serviceCollection.AddTransient<DayTwelve>();
 //serviceCollection.AddTransient<DayThirteen>();
@@ -54,5 +54,6 @@ var services = serviceCollection.BuildServiceProvider();
 
 await new AocRunner().Run(services, DateTime.Now.Day);
 
-
-
+//await forach day in moth
+//foreach (var day in Enumerable.Range(1, 25))
+//    await new AocRunner().Run(services, day);

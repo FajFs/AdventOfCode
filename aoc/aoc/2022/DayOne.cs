@@ -8,26 +8,23 @@
     
     public async Task Run()
     {
-        await _dataFetcher.GetAndStoreData();
+        await _dataFetcher.GetAndStoreData(day: 1);
         Part1();
         Part2();
     }
 
     private void Part1()
     {
-        var result = _dataFetcher.ParseDataAsStrings("\n\n")
-            .Select(elf =>
-                elf.Split("\n").Select(x => int.Parse(x)).Sum())
+        var result = _dataFetcher.Parse<int>("\n\n", new char[] {'\n'})
+            .Select(elf => elf.Sum())
             .Max();
-
         Console.WriteLine($"part 1: {result}");
     }
     
     private void Part2()
     {
-        var result = _dataFetcher.ParseDataAsStrings("\n\n")
-            .Select(elf =>
-                elf.Split("\n").Select(x => int.Parse(x)).Sum())
+        var result = _dataFetcher.Parse<int>("\n\n", new char[] { '\n' })
+            .Select(elf => elf.Sum())
             .OrderBy(x => -x)
             .Take(3)
             .Sum();

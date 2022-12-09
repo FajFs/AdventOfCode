@@ -8,7 +8,7 @@
     
     public async Task Run()
     {
-        await _dataFetcher.GetAndStoreData();
+        await _dataFetcher.GetAndStoreData(day: 2);
         Part1();
         Part2();
     }
@@ -46,12 +46,8 @@
 
     private void Part1()
     {
-        var result = _dataFetcher.ParseDataAsStrings("\n")
-            .Select(x =>
-            {
-                var tmp = x.Split(" ");
-                return (GetSignValue(tmp[0]), GetSignValue(tmp[1]));
-            })
+        var result = _dataFetcher.Parse<string>("\n", new char[] { ' ' })
+            .Select(x => (GetSignValue(x[0]), GetSignValue(x[1])))
             .Select(x => CalculateOutcome(x.Item1, x.Item2))
             .Sum();
 
@@ -60,16 +56,15 @@
 
     private void Part2()
     {
-        var result = _dataFetcher.ParseDataAsStrings("\n")
-            .Select(x =>
-            {
-                var tmp = x.Split(" ");
-                var opponent = GetSignValue(tmp[0]);
-                var you = GetPredictedValue(opponent, tmp[1]);
-                return (opponent, you);
-            })
-            .Select(x => CalculateOutcome(x.Item1, x.Item2))
-            .Sum();
+        var result = _dataFetcher.Parse<string>("\n", new char[] { ' ' })
+        .Select(x =>
+        {
+            var opponent = GetSignValue(x[0]);
+            var you = GetPredictedValue(opponent, x[1]);
+            return (opponent, you);
+        })
+        .Select(x => CalculateOutcome(x.Item1, x.Item2))
+        .Sum();
 
         Console.WriteLine($"part 2: {result}");
     }

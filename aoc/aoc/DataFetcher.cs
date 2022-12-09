@@ -13,8 +13,31 @@ public class DataFetcher
         _httpClient = httpClientFactory.CreateClient("DataFetcherClient") ?? throw new ArgumentNullException(nameof(httpClientFactory));
     }
 
-    public List<string> ParseDataAsStrings(string deliminator) => Data.Split($"{deliminator}").Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim()).ToList();
-    public List<int> ParseDataAsInts(string deliminator) => Data.Split($"{deliminator}").Where(x => !string.IsNullOrEmpty(x)).Select(x => int.Parse(x)).ToList();
+    //pass in type of the innermost element
+    //trim execive whitespace
+    //split on the separators and parse to inner type
+    public IEnumerable<IList<T>> Parse<T>(string initalSeparator, char[] separators, int skip = 0)
+        =>  Data!.Split(initalSeparator)
+            .Where(x => !string.IsNullOrEmpty(x))
+            .Select(x => x.Trim())
+            .Skip(skip)
+            .Select(x =>  x.Split(separators)
+                .Select(y => (T)Convert.ChangeType(y, typeof(T))).ToList());
+
+
+
+    //pass in type of the innermost element
+    //trim execive whitespace        
+    //split on the separators and parse to type
+    public IList<T> Parse<T>(string separator, int skip = 0)
+        =>  Data!
+            .Split(separator)
+            .Where(x => !string.IsNullOrEmpty(x))
+            .Select(x => x.Trim())
+            .Skip(skip)
+            .Select(y => (T)Convert.ChangeType(y, typeof(T)))
+            .ToList();
+    
 
     private void StoreData(int year, int day) => File.WriteAllText($"year{year}day{day}.txt", Data);
     private bool TryLoadDataFromFile(int year, int day)
