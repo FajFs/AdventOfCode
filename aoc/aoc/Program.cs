@@ -34,7 +34,7 @@ serviceCollection.AddTransient<DaySeven>();
 serviceCollection.AddTransient<DayEight>();
 serviceCollection.AddTransient<DayNine>();
 serviceCollection.AddTransient<DayTen>();
-//serviceCollection.AddTransient<DayEleven>();
+serviceCollection.AddTransient<DayEleven>();
 //serviceCollection.AddTransient<DayTwelve>();
 //serviceCollection.AddTransient<DayThirteen>();
 //serviceCollection.AddTransient<DayFourteen>();
