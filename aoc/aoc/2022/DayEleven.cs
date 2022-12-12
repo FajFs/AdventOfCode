@@ -40,25 +40,26 @@ public class DayEleven
             var op = monkeyStringList[2].Split(" ").Skip(4).First();
             var hasStaticWorry = long.TryParse(monkeyStringList[2].Split(" ").Skip(5).First(), out var staticWorry);
 
-            long operation(long oldWorry)
-                => op == "*" ? (long)Math.Floor((oldWorry * (hasStaticWorry ? staticWorry : oldWorry) / divideBy)) % commonMultiplier 
+            long getNewWorry(long oldWorry)
+                => op == "*" 
+                ? (long)Math.Floor((oldWorry * (hasStaticWorry ? staticWorry : oldWorry) / divideBy)) % commonMultiplier 
                 : (long)Math.Floor((oldWorry + (hasStaticWorry ? staticWorry : oldWorry) / divideBy)) % commonMultiplier;
 
             //parse monkey business test method
-            var modulu = int.Parse(monkeyStringList[3].Split(" ").Last());
+            var modolu = int.Parse(monkeyStringList[3].Split(" ").Last());
             var trueMonkey = long.Parse(monkeyStringList[4].Split(" ").Last());
             var falseMonkey = long.Parse(monkeyStringList[5].Split(" ").Last());
 
-            long test(long newValue) 
-                => newValue % modulu == 0 ? trueMonkey : falseMonkey;
+            long getNextMonkey(long newValue) 
+                => newValue % modolu == 0 ? trueMonkey : falseMonkey;
 
             var monkey = new Monkey
             {
                 Id = id,
                 Items = items,
                 InspectedItems = 0,
-                Operation = operation,
-                Test = test,
+                GetNewWorry = getNewWorry,
+                GetNextMonkey = getNextMonkey,
             };
 
             //add monkey to list of MANKIS
@@ -98,8 +99,8 @@ public class DayEleven
     {
         public int Id { get; set; }
         public Queue<long> Items { get; set; }
-        public Func<long, long> Operation { get; init; }
-        public Func<long, long> Test{ get; init; }
+        public Func<long, long> GetNewWorry { get; init; }
+        public Func<long, long> GetNextMonkey{ get; init; }
         public BigInteger InspectedItems { get; set; } = 0;
 
  
@@ -107,8 +108,8 @@ public class DayEleven
         {
             while (Items.Any())
             {
-                var item = Operation(Items.Dequeue());
-                DayEleven.Monkeys.SingleOrDefault(x => x.Id == Test(item))!.Items.Enqueue(item);
+                var item = GetNewWorry(Items.Dequeue());
+                DayEleven.Monkeys.SingleOrDefault(x => x.Id == GetNextMonkey(item))!.Items.Enqueue(item);
                 InspectedItems++;
             }            
         }

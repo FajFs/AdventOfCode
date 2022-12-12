@@ -24,7 +24,7 @@ public class AocRunner
         10 => services.GetRequiredService<DayTen>().Run(),
         11 => services.GetRequiredService<DayEleven>().Run(),
         12 => services.GetRequiredService<DayTwelve>().Run(),
-        //13 => services.GetRequiredService<DayThirteen>().Run(),
+        13 => services.GetRequiredService<DayThirteen>().Run(),
         //14 => services.GetRequiredService<DayFourteen>().Run(),
         //15 => services.GetRequiredService<DayFifteen>().Run(),
         //16 => services.GetRequiredService<DaySixteen>().Run(),
