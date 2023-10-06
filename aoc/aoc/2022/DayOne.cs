@@ -1,34 +1,37 @@
-﻿public class DayOne
+﻿using AdventOfCode.Common;
+using AdventOfCode.Worker;
+
+namespace AdventOfCode.Worker;
+
+public class DayOne(
+    ILogger<DayOne> logger,
+    IInputRepository inputRepository)
+    : IDay
 {
-    private readonly DataFetcher _dataFetcher;
-    public DayOne(DataFetcher dataFetcher)
+    private readonly IInputRepository _inputRepository = inputRepository ?? throw new ArgumentNullException(nameof(inputRepository));
+    private readonly ILogger<DayOne> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+    public async Task Part1()
     {
-        _dataFetcher = dataFetcher ?? throw new ArgumentNullException(nameof(dataFetcher));
-    }
-    
-    public async Task Run()
-    {
-        await _dataFetcher.GetAndStoreData(day: 1);
-        Part1();
-        Part2();
+       await _inputRepository.GetInputAsync(year: 2022, day: 1);
+        var result = _inputRepository.ToEnumerableOfList<int>("\n\n", "\n")
+            .Select(x => x.Sum())
+            .Max();
+
+        _logger.LogInformation("Part 1: {result}", result);
     }
 
-    private void Part1()
+    public async Task Part2()
     {
-        var result = _dataFetcher.Parse<int>("\n\n", new char[] {'\n'})
-            .Select(elf => elf.Sum())
-            .Max();
-        Console.WriteLine($"part 1: {result}");
-    }
-    
-    private void Part2()
-    {
-        var result = _dataFetcher.Parse<int>("\n\n", new char[] { '\n' })
+        await _inputRepository.GetInputAsync(year: 2022, day: 1);
+
+        var result = _inputRepository.ToEnumerableOfList<int>("\n\n", "\n")
             .Select(elf => elf.Sum())
             .OrderBy(x => -x)
             .Take(3)
             .Sum();
-            
-        Console.WriteLine($"part 2: {result}");
+
+
+        _logger.LogInformation("Part 2: {result}", result);
     }
 }
