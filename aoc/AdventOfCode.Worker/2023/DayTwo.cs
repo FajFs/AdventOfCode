@@ -1,4 +1,5 @@
 ﻿using AdventOfCode.Common;
+using AdventOfCode.Worker.Interfaces;
 using MoreLinq;
 
 namespace AdventOfCode.Worker;

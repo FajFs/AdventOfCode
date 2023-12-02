@@ -1,5 +1,7 @@
 ﻿using AdventOfCode.Common;
 using AdventOfCode.Worker;
+using AdventOfCode.Worker.Extensions;
+using AdventOfCode.Worker.Interfaces;
 
 var builder = Host.CreateDefaultBuilder(args);
 

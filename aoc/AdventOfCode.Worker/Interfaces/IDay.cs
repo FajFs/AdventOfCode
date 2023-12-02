@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Worker;
+﻿namespace AdventOfCode.Worker.Interfaces;
 
 public interface IDay
 {
