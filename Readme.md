@@ -1,1 +1,1 @@
-# Advent of Code channanigans
+# Advent of Code Channanigans
