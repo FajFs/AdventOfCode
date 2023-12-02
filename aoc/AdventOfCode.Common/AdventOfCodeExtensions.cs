@@ -42,7 +42,7 @@ public static class AdventOfCodeExtensions
     {
         foreach (var dayService in typeof(TService).Assembly.GetTypes()
             .Where(x => typeof(TService).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract))
-                services.AddTransient(dayService);
+            services.AddTransient(dayService);
 
         return services;
     }
