@@ -3,10 +3,11 @@
 namespace AdventOfCode.Common;
 
 public class InputRepository(
-    HttpClient _httpClient)
-    :
- IInputRepository
+    HttpClient httpClient)
+    : IInputRepository
 {
+    private readonly HttpClient _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+
     public string? Data { get; private set; }
 
     private int _year;
@@ -30,6 +31,7 @@ public class InputRepository(
 
     public async Task GetInputAsync(int year, int day)
     {
+        httpClient = new HttpClient();
         _day = day;
         _year = year;
 
