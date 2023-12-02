@@ -20,6 +20,7 @@ public partial class DayTwo(
         var blues = 14;
         var greens = 13;
 
+        //Game 1: 3 blue, 20 red; 1 red, 2 green, 6 blue; 2 green
         var result = lines.Select(x =>
         {
             var gameNumber = int.Parse(x.Replace("Game ", "").Split(":").First());
@@ -43,6 +44,7 @@ public partial class DayTwo(
         await _inputRepository.GetInputAsync(year: 2023, day: 2);
         var lines = _inputRepository.ToList<string>("\n");
 
+        //Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
         var result = lines.Select(x =>
         {
             var minumumReds = 0;
