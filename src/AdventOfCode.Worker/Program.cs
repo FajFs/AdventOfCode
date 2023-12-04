@@ -13,5 +13,5 @@ builder.ConfigureServices((hostContext, services) =>
 
 var app = builder.Build();
 
-await app.Services.GetRequiredService<DayTree>().ExecuteAsync();
+await app.Services.GetRequiredService<DayFour>().ExecuteAsync();
 
