@@ -28,7 +28,7 @@ public partial class DayFour(
                 .ToList();
 
                 //calculate score for each card
-                var result =  drawnEntries.Select(x => winningEntries.Count(y => y == x)).Sum();
+                var result = drawnEntries.Select(x => winningEntries.Count(y => y == x)).Sum();
                 return Math.Floor(Math.Pow(2, result - 1));
             })
             .Sum();

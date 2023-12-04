@@ -1,7 +1,5 @@
 ﻿using AdventOfCode.Common;
 using AdventOfCode.Worker.Interfaces;
-using System;
-using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Worker;
 
@@ -29,7 +27,7 @@ public partial class DayTree(
             for (int x = 0; x < maxX; x++)
             {
                 var symbol = line[x];
-                var point = new Point(x, y, new(x,y));
+                var point = new Point(x, y, new(x, y));
                 //check if symbol is not point and not digit
                 if (symbol != '.' && !char.IsDigit(symbol))
                 {
@@ -50,7 +48,7 @@ public partial class DayTree(
                     if (x - 1 >= 0 && y + 1 < maxY)
                         _symbolsCollisionMatrix.Add(new(x - 1, y + 1, point));
                     if (x + 1 < maxX && y - 1 >= 0)
-                        _symbolsCollisionMatrix.Add(new(x + 1, y - 1, point));                   
+                        _symbolsCollisionMatrix.Add(new(x + 1, y - 1, point));
                 }
             }
         }
@@ -70,16 +68,16 @@ public partial class DayTree(
             {
                 var symbol = line[x];
                 if (char.IsDigit(symbol))
-                    points.Add(new(x,y));
+                    points.Add(new(x, y));
 
                 //check if symbol is not digit or last symbol in line
-                if(!char.IsDigit(symbol) || x == maxX - 1)
+                if (!char.IsDigit(symbol) || x == maxX - 1)
                 {
                     if (points.Count == 0)
                         continue;
                     //check if point is in symbol collistion matrix
                     else if (points.Any(x => _symbolsCollisionMatrix.Any(y => y.X == x.X && y.Y == x.Y)))
-                    //aggregate xpoints and convert to int
+                        //aggregate xpoints and convert to int
                         yield return
                             int.Parse(
                                     string.Join("", points.Select(x => line[x.X])));
@@ -96,7 +94,7 @@ public partial class DayTree(
         await _inputRepository.GetInputAsync(year: 2023, day: 3);
         var input = _inputRepository.ToList<string>("\n");
         BuildSymbolsCollisionMatrix(input);
-        
+
         var result = PartNumbersConnectedToSymbol(input).Sum();
         _logger.LogInformation("Part 1: {result}", result);
     }
@@ -130,8 +128,8 @@ public partial class DayTree(
                         //check if collision point is connected to a gear symbol
                         var gearCandidate = _symbolsCollisionMatrix.Where(x => points.Any(y => y.X == x.X && y.Y == x.Y)).FirstOrDefault()?.BasePoint;
                         if (gearCandidate is not null && input[gearCandidate!.Y][gearCandidate!.X] == '*')
-                            yield return 
-                                (gearCandidate, 
+                            yield return
+                                (gearCandidate,
                                 int.Parse(string.Join("", points.Select(x => line[x.X]))));
                     }
                     //collision! clear points
@@ -146,8 +144,8 @@ public partial class DayTree(
         await _inputRepository.GetInputAsync(year: 2023, day: 3);
         var input = _inputRepository.ToList<string>("\n");
         BuildSymbolsCollisionMatrix(input);
-        
-        
+
+
         var result = PartNumbersConnectedToAGear(input)
             //group by gear candidate
             .GroupBy(x => x.Item1)
@@ -157,7 +155,7 @@ public partial class DayTree(
             .Select(x => (x.Key, x.Select(y => y.Item2).Aggregate((a, b) => a * b)))
             //sum all results
             .Sum(x => x.Item2);
-             
+
         _logger.LogInformation("Part 2: {result}", result);
     }
 
