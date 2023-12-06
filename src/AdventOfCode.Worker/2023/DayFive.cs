@@ -40,10 +40,10 @@ public partial class DayFive(
         //process blockwise
         foreach (var block in blocks)
         {
-            var seedRanges = block.Select(line 
+            var seedRanges = block.Select(line
                 => new Seed(
-                    Destination: long.Parse(line.Split(' ')[0]), 
-                    Source: long.Parse(line.Split(' ')[1]), 
+                    Destination: long.Parse(line.Split(' ')[0]),
+                    Source: long.Parse(line.Split(' ')[1]),
                     Range: long.Parse(line.Split(' ')[2]))).ToList();
 
             var temporarySeeds = new List<long>();
@@ -95,7 +95,7 @@ public partial class DayFive(
              regex: "seed-to-soil map:|soil-to-fertilizer map:|fertilizer-to-water map:|water-to-light map:|light-to-temperature map:|temperature-to-humidity map:|humidity-to-location map:",
              separator: "\n",
              skip: 1);
-            
+
         var blockRanges = new List<List<Seed>>();
         //process blockwise
         foreach (var block in blocks)
@@ -114,7 +114,7 @@ public partial class DayFive(
                 var seedRange = seedsRanges.First();
                 //remove first seedRange
                 seedsRanges = seedsRanges[1..];
-            
+
                 var match = false;
                 //go through all seeds in current block
                 foreach (var seed in seeds)
@@ -122,7 +122,7 @@ public partial class DayFive(
                     //check if there is any overlap at all
                     var overlapStart = Math.Max(seedRange.Start, seed.Source);
                     var overlapEnd = Math.Min(seedRange.End, seed.Source + seed.Range);
-                    if(overlapStart < overlapEnd)
+                    if (overlapStart < overlapEnd)
                     {
                         //there is overlap!
                         match = true;
