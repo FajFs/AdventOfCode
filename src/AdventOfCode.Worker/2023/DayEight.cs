@@ -1,5 +1,6 @@
 ﻿using AdventOfCode.Common;
 using AdventOfCode.Worker.Interfaces;
+using MathNet.Numerics;
 using System.Collections.Frozen;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -99,21 +100,9 @@ public partial class DayEight(
             .Select(x => GetStepsUntilGhostStops(x, instructions, nodes)).ToList();
 
         //calculate LCM
-        var lcm = stepsToReachEnd.Aggregate((a, b) => (a / Gcf(a, b)) * b);
+        var lcm = stepsToReachEnd.Aggregate(Euclid.LeastCommonMultiple);
 
         _logger.LogInformation("Part 2: {result}", lcm);
 
-    }
-
-    //helper method to calculate LCM
-    private static long Gcf(long a, long b)
-    {
-        while (b != 0)
-        {
-            long temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
     }
 }
